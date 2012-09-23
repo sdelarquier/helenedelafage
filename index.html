@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html> 
+  <head>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+    <script type="text/JavaScript" src="javascripts/js_lib.js"></script>
+  </head>
+  <body>
+  	<div class="sidebar">
+  	  <div class="nav">
+  	    <div class="pages">
+		  <div class="nav-cat"><a href="javascript:void(null)">
+		    <div class="nav-cat-link" onclick="navSelect(this,'nav-cat')">Contact</div>
+		  </a></div>
+		  <div class="nav-cat"><a href="javascript:void(null)">
+		    <div class="nav-cat-link" onclick="navSelect(this,'nav-cat')">Evenements</div>
+		  </a></div>
+	    </div>
+	    <div class="h-delim"></div>
+	    {% for cat in categories %}
+		  <div class="nav-cat"><a href="#">
+		    <div class="nav-cat-link" onclick="navSelect(this,'nav-cat')">{{ cat }}</div>
+		  </a></div>
+		{% endfor %}
+	  </div>
+	  <div class="footer">
+	    {% if admin_url %}
+	      <div class="footer-nav"><a href="{{ admin_url }}">{{ admin_linktext }}</a></div>
+	    {% endif %}
+		<div class="footer-nav"><a href="{{ url }}">{{ url_linktext }}</a></div>
+	  </div>
+  	</div>
+  	<div class="right-content">
+	  <div class="header">
+	    <div class="title">{{ title }}</div>
+	    <div class="subtitle">{{ subtitle }}</div>
+	  </div>
+  	  {% if mode == 'welcome' %}
+	    <div class="content-welcome">
+	      {{ welcome }}
+	    </div>
+	  {% elif mode == 'pages' %}
+	    <div class="content-pages">
+	      {% if pageName == 'contact' %}
+	        <div class="pages-contact">
+			  <div>Email:<br>
+			  {{ email }}</div>
+			  <div>Tel:<br>
+			  {{ phone }}</div>
+			  <div>Addresse:<br>
+			  {{ address }}</div>
+		    </div>
+	      {% elif pageName == 'events' %}
+		    <div class="pages-events">
+		    </div>
+		  {% endif %}
+	    </div>
+	  {% endif %}
+	</div>
+  </body>
+</html>

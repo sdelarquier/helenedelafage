@@ -1,0 +1,38 @@
+indexes:
+
+- kind: WebsiteElem
+  ancestor: no
+  properties:
+  - name: title
+  - name: subtitle
+  - name: welcome
+  - name: email
+  - name: phone
+  - name: address
+  - name: categories
+
+- kind: NavElem
+  ancestor: no
+  properties:
+  - name: mode
+  - name: pageName
+
+- kind: ArtElem
+  ancestor: yes
+  properties:
+  - name: title
+  - name: date
+    direction: desc
+  - name: mainPic
+  - name: thumb
+  - name: price
+  - name: dimension
+  - name: category
+  - name: closeUps
+
+- kind: ImgElem
+  ancestor: yes
+  properties:
+  - name: img
+
+
