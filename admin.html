@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html> 
+<html>
   <head>
     <link type="text/css" rel="stylesheet" href="/stylesheets/admin.css" />
     <script type="text/JavaScript" src="javascripts/js_lib.js"></script>
   </head>
   <body>
     <div class="top-nav">
-      <span class="admin-main"><a href="/admin">Admin page</a></span>
+      <span class="admin-link-selected"><a href="/admin">Admin page</a></span>
       <span class="v-delim"></span>
-      <span class="admin-main"><a href="/admin/art">Art</a></span>
+      <span class="admin-link"><a href="/admin/art">Art</a></span>
       <span class="v-delim"></span>
       <span class="admin-back"><a href="/">Back to site</a></span>
       <span class="v-delim"></span>
@@ -16,31 +16,7 @@
     </div>
 	<div class="content">
       <div class="admin-action"></div>
-      <div>
-        <form action="/admin/update" method="post">
-		  <div class="admin-elem">Enter website title:<br>
-		    <textarea name="title" rows="2" cols="60">{{ title }}</textarea><br>
-		  </div>
-		  <div class="admin-elem">Enter website sub-title:<br>
-		    <textarea name="subtitle" rows="2" cols="60">{{ subtitle }}</textarea><br>
-		  </div>
-		  <div class="admin-elem">Enter a welcome message:<br>
-		    <textarea name="welcome" rows="10" cols="60">{{ welcome }}</textarea><br>
-		  </div>
-		  <div class="admin-elem">Enter a phone number:<br>
-		    <input type='text' name="tel" value="{{ phone }}"><br>
-		  </div>
-		  <div class="admin-elem">Enter an email address:<br>
-		    <input type='text' name="email" size="60" value="{{ email }}"><br>
-		  </div>
-		  <div class="admin-elem">Enter an address:<br>
-		    <textarea name="address" rows="2" cols="60">{{ address }}</textarea><br>
-		  </div>
-		  <div class="submit">
-		    <input type="submit" value="Save changes" onclick="showChange()">
-		  </div>
-		</form>
-      </div>
+      {% block content %}{% endblock %}
     </div>
   </body>
 </html>

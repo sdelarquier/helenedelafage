@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+{% block content %}
+	{% if mode == 'welcome' %}
+	<div class="content-welcome">
+		{{ welcome }}
+	</div>
+	{% elif mode == 'pages' %}
+	<div class="content-pages">
+		{% if pageName == 'contact' %}
+			<div class="pages-contact">
+				{% if email %}
+					<div>Email:<br>
+					{{ email }}</div>
+			  	{% endif %}
+				{% if phone %}
+					<div>Tel:<br>
+					{{ phone }}</div>
+			  	{% endif %}
+				{% if address %}
+					<div>Addresse:<br>
+					{{ address }}</div>
+			  	{% endif %}
+			</div>
+	  	{% elif pageName == 'events' %}
+			<div class="pages-events">
+			</div>
+	  	{% endif %}
+	</div>
+	{% endif %}
+{% endblock %}

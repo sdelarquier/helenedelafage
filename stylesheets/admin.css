@@ -28,7 +28,7 @@ body {
   border-right:  solid 1px #999;
 }
 
-.top-nav a, 
+.top-nav a,
 .top-nav a:visited {
   color: #666;
   text-decoration: none;
@@ -38,7 +38,13 @@ body {
   color: #111;
 }
 
-.top-nav .admin-main {
+.top-nav .admin-link {
+  padding: 2px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.top-nav .admin-link-selected {
   padding: 2px;
   padding-right: 10px;
   padding-left: 10px;

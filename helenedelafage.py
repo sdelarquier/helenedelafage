@@ -34,7 +34,7 @@ class NavElem(db.Model):
 	"""Models navigation data store."""
 	mode = db.StringProperty(required=True)
 	pageName = db.DateTimeProperty(required=True)
-	
+
 
 class ImgElem(db.Model):
 	"""Models navigation data store."""
@@ -65,7 +65,7 @@ class MainPage(webapp2.RequestHandler):
 		phone = adminOpt.phone
 		email = adminOpt.email
 		address = adminOpt.address
-		
+
 		admin_url = None
 		admin_linktext = None
 		if users.get_current_user():
@@ -77,11 +77,11 @@ class MainPage(webapp2.RequestHandler):
 		else:
 			url = users.create_login_url(self.request.uri)
 			url_linktext = 'Login'
-		
+
 		categories = ['Meubles','Toiles','Bois']
 		mode = 'welcome'
 		pageName = None
-		
+
 		template_values = {
 			'title': title,
 			'subtitle': subtitle,
@@ -90,15 +90,15 @@ class MainPage(webapp2.RequestHandler):
 			'pageName': pageName,
 			'welcome': welcome,
 			'phone': phone,
-			'email': email,	
+			'email': email,
 			'address': address,
 			'admin_url': admin_url,
 			'admin_linktext': admin_linktext,
 			'url': url,
 			'url_linktext': url_linktext,
 		}
-		
-		template = jinja_environment.get_template('index.html')
+
+		template = jinja_environment.get_template('main-content.html')
 		self.response.out.write(template.render(template_values))
 
 
@@ -114,14 +114,14 @@ class AdminPage(webapp2.RequestHandler):
 		phone = adminOpt.phone
 		email = adminOpt.email
 		address = adminOpt.address
-		
+
 		if users.get_current_user():
 			url = users.create_logout_url(self.request.uri)
 			url_linktext = 'Logout'
 		else:
 			url = users.create_login_url(self.request.uri)
 			url_linktext = 'Login'
-		
+
 		template_values = {
 			'title': title,
 			'subtitle': subtitle,
@@ -132,35 +132,53 @@ class AdminPage(webapp2.RequestHandler):
 			'url': url,
 			'url_linktext': url_linktext,
 		}
-		
-		template = jinja_environment.get_template('admin.html')
+
+		template = jinja_environment.get_template('admin-general.html')
 		self.response.out.write(template.render(template_values))
 
 
 class AdminUpdate(webapp2.RequestHandler):
 	def post(self):
 		adminOpt = WebsiteElem.get_or_insert('admin')
-		
+
 		adminOpt.title = self.request.get('title')
 		adminOpt.subtitle = self.request.get('subtitle')
 		adminOpt.welcome = self.request.get('welcome')
 		adminOpt.phone = self.request.get('tel')
 		adminOpt.email = self.request.get('email')
 		adminOpt.address = self.request.get('address')
-		
+
 		adminOpt.put()
 		self.redirect('/admin')
 
 
 # ********************************************
-# admin_art.html
+# admin-art.html
 # ********************************************
-class AdminPage(webapp2.RequestHandler):
+class AdminArtPage(webapp2.RequestHandler):
     def get(self):
-    	artlib = ArtElem.all()
-		
-		template = jinja_environment.get_template('admin_art.html')
+		artlib = ArtElem.all()
+		adminOpt = WebsiteElem.get_or_insert('admin')
+
+		template_values = {
+			'categories': adminOpt.categories
+		}
+
+		template = jinja_environment.get_template('admin-art.html')
 		self.response.out.write(template.render(template_values))
+
+
+class AdminArtUpdate(webapp2.RequestHandler):
+	def post(self):
+		adminOpt = WebsiteElem.get_or_insert('admin')
+
+		categories = self.request.get('categories')
+		if categories:
+			for cat in categories:
+				adminOpt.categories.append(cat)
+
+		adminOpt.put()
+		self.redirect('/admin')
 
 
 # ********************************************

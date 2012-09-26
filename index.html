@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html> 
+<html>
   <head>
     <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
     <script type="text/JavaScript" src="javascripts/js_lib.js"></script>
   </head>
   <body>
   	<div class="sidebar">
+  	  {% block nav %}
   	  <div class="nav">
   	    <div class="pages">
 		  <div class="nav-cat"><a href="javascript:void(null)">
@@ -22,39 +23,24 @@
 		  </a></div>
 		{% endfor %}
 	  </div>
+	  {% endblock %}
+	  {% block footer %}
 	  <div class="footer">
 	    {% if admin_url %}
 	      <div class="footer-nav"><a href="{{ admin_url }}">{{ admin_linktext }}</a></div>
 	    {% endif %}
 		<div class="footer-nav"><a href="{{ url }}">{{ url_linktext }}</a></div>
 	  </div>
+	  {% endblock %}
   	</div>
   	<div class="right-content">
+  	  {% block header %}
 	  <div class="header">
 	    <div class="title">{{ title }}</div>
 	    <div class="subtitle">{{ subtitle }}</div>
 	  </div>
-  	  {% if mode == 'welcome' %}
-	    <div class="content-welcome">
-	      {{ welcome }}
-	    </div>
-	  {% elif mode == 'pages' %}
-	    <div class="content-pages">
-	      {% if pageName == 'contact' %}
-	        <div class="pages-contact">
-			  <div>Email:<br>
-			  {{ email }}</div>
-			  <div>Tel:<br>
-			  {{ phone }}</div>
-			  <div>Addresse:<br>
-			  {{ address }}</div>
-		    </div>
-	      {% elif pageName == 'events' %}
-		    <div class="pages-events">
-		    </div>
-		  {% endif %}
-	    </div>
-	  {% endif %}
+	  {% endblock %}
+	  {% block content %}{% endblock %}
 	</div>
   </body>
 </html>
